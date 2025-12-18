@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Recipe;
+use App\Models\Food;
 use Illuminate\Http\Request;
 
 class FoodRecipeController extends Controller
@@ -28,7 +30,30 @@ class FoodRecipeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'recipe_id' => 'required|exists:recipes,id',
+            'food_id' => 'required|exists:food,id',
+            'quantity' => 'required|numeric|min:0.01',
+        ]);
+
+        $recipe = Recipe::find($validated['recipe_id']);
+        $food = Food::find($validated['food_id']);
+
+        if (!$recipe || !$food) {
+            return response()->json(['message' => 'Recipe or Food not found'], 404);
+        }
+
+        // Attach atau update relasi
+        $recipe->foods()->syncWithoutDetaching([
+            $validated['food_id'] => ['quantity' => $validated['quantity']]
+        ]);
+
+        return response()->json([
+            'message' => 'Food added to recipe',
+            'recipe_id' => $validated['recipe_id'],
+            'food_id' => $validated['food_id'],
+            'quantity' => $validated['quantity']
+        ], 201);
     }
 
     /**
@@ -58,8 +83,21 @@ class FoodRecipeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'recipe_id' => 'required|exists:recipes,id',
+            'food_id' => 'required|exists:food,id',
+        ]);
+
+        $recipe = Recipe::find($validated['recipe_id']);
+        
+        if (!$recipe) {
+            return response()->json(['message' => 'Recipe not found'], 404);
+        }
+
+        $recipe->foods()->detach($validated['food_id']);
+
+        return response()->json(['message' => 'Food removed from recipe'], 200);
     }
 }
