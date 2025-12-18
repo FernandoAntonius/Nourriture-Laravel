@@ -21,5 +21,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // Import foods from CSV
+        $this->call(FoodSeeder::class);
     }
 }

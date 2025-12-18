@@ -33,13 +33,21 @@ class FoodController extends Controller
             'name' => 'required|string|max:40',
             'measure' => 'required|numeric',
             'grams' => 'required|numeric',
-            'calories' => 'required|numeric',
-            'protein' => 'required|numeric',
-            'fat' => 'required|numeric',
-            'sat_fat' => 'required|numeric',
-            'fiber' => 'required|numeric',
-            'carbs' => 'required|numeric',
+            'calories' => 'sometimes|numeric|min:0',
+            'protein' => 'sometimes|numeric|min:0',
+            'fat' => 'sometimes|numeric|min:0',
+            'sat_fat' => 'sometimes|numeric|min:0',
+            'fiber' => 'sometimes|numeric|min:0',
+            'carbs' => 'sometimes|numeric|min:0',
         ]);
+
+        // Set default 0 untuk nutrition yang tidak diisi
+        $validated['calories'] = $validated['calories'] ?? 0;
+        $validated['protein'] = $validated['protein'] ?? 0;
+        $validated['fat'] = $validated['fat'] ?? 0;
+        $validated['sat_fat'] = $validated['sat_fat'] ?? 0;
+        $validated['fiber'] = $validated['fiber'] ?? 0;
+        $validated['carbs'] = $validated['carbs'] ?? 0;
 
         $food = Food::create($validated);
         return response()->json($food, 201);
@@ -82,12 +90,12 @@ class FoodController extends Controller
             'name' => 'sometimes|string|max:40',
             'measure' => 'sometimes|numeric',
             'grams' => 'sometimes|numeric',
-            'calories' => 'sometimes|numeric',
-            'protein' => 'sometimes|numeric',
-            'fat' => 'sometimes|numeric',
-            'sat_fat' => 'sometimes|numeric',
-            'fiber' => 'sometimes|numeric',
-            'carbs' => 'sometimes|numeric',
+            'calories' => 'sometimes|numeric|min:0',
+            'protein' => 'sometimes|numeric|min:0',
+            'fat' => 'sometimes|numeric|min:0',
+            'sat_fat' => 'sometimes|numeric|min:0',
+            'fiber' => 'sometimes|numeric|min:0',
+            'carbs' => 'sometimes|numeric|min:0',
         ]);
 
         $food->update($validated);

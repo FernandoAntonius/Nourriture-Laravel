@@ -15,13 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name', 40);
             $table->float('measure');
-            $table->float('grams');
-            $table->float('calories');
-            $table->float('protein');
-            $table->float('fat');
-            $table->float('sat_fat');
-            $table->float('fiber');
-            $table->float('carbs');
             $table->timestamps();
         });
     }
