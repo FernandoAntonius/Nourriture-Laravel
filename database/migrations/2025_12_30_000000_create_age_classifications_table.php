@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('recipes', function (Blueprint $table) {
+        Schema::create('age_classifications', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 40);
-            $table->string('description', 255)->nullable();
+            $table->string('name');
+            $table->integer('min_age');
+            $table->integer('max_age');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('recipes');
+        Schema::dropIfExists('age_classifications');
     }
 };

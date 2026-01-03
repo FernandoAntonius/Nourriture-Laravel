@@ -15,14 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Seed age classifications first
+        $this->call(AgeClassificationSeeder::class);
+
         // User::factory(10)->create();
 
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
-
-        // Import foods from CSV
-        $this->call(FoodSeeder::class);
     }
 }
