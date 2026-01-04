@@ -15,7 +15,6 @@ Route::apiResource('age-classifications', AgeClassificationController::class);
 Route::apiResource('persons', PersonController::class);
 Route::apiResource('predict', PredictController::class);
 
-// History routes (protected by auth:sanctum)
 Route::apiResource('histories', HistoryController::class)->middleware('auth:sanctum');
 Route::delete('/histories-clear', [HistoryController::class, 'clearAll'])->middleware('auth:sanctum');
 
