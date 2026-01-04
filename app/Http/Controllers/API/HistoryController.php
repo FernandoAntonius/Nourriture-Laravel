@@ -84,10 +84,8 @@ class HistoryController extends Controller
 
         $validated = $request->validate([
             'name' => 'sometimes|string|max:255',
-            'age' => 'sometimes|integer|min:0|max:150',
-            'email' => 'sometimes|email',
-            'phone' => 'nullable|string',
-            'address' => 'nullable|string',
+            'confidence' => 'sometimes|numeric|min:0|max:100',
+            'description' => 'nullable|string',
         ]);
 
         $history->update($validated);

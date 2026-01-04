@@ -12,15 +12,13 @@ class History extends Model
     protected $fillable = [
         'user_id',
         'name',
-        'age',
         'age_classification_id',
-        'email',
-        'phone',
-        'address',
+        'confidence',
+        'description',
     ];
 
     protected $casts = [
-        'age' => 'integer',
+        'confidence' => 'decimal:2',
     ];
 
     /**
