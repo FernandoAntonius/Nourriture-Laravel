@@ -9,8 +9,8 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\ContactUsController;
 
 // Auth routes (public)
-Route::post('/auth/register', [AuthController::class, 'register']);
-Route::post('/auth/login', [AuthController::class, 'login']);
+Route::post('/auth/register', [AuthController::class, 'register'])->name('register');
+Route::post('/auth/login', [AuthController::class, 'login'])->name('login');
 
 Route::get('/user', function (Request $request) {
     return $request->user();
