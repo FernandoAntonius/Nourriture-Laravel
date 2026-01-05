@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('name');
+            $table->string('predicted_age_group');
             $table->decimal('confidence', 5, 2);
             $table->text('description')->nullable();
             $table->timestamps();

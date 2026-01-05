@@ -23,6 +23,7 @@ class HistoryController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'predicted_age_group' => 'string|max:255',
             'confidence' => 'required|numeric|min:0|max:100',
             'description' => 'nullable|string',
         ]);
@@ -93,6 +94,7 @@ class HistoryController extends Controller
 
         $validated = $request->validate([
             'name' => 'sometimes|string|max:255',
+            'predicted_age_group' => 'nullable|string|max:255',
             'confidence' => 'sometimes|numeric|min:0|max:100',
             'description' => 'nullable|string',
         ]);
