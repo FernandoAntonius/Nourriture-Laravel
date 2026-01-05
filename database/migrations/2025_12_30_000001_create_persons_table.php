@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->string('predicted_age_group');
+            $table->decimal('confidence', 5, 2);
             $table->timestamps();
         });
     }

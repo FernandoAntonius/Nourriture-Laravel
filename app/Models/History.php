@@ -12,6 +12,7 @@ class History extends Model
     protected $fillable = [
         'user_id',
         'name',
+        'predicted_age_group',
         'confidence',
         'description',
     ];

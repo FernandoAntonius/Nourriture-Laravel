@@ -25,6 +25,8 @@ class PersonController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'predicted_age_group' => 'string|max:255',
+            'confidence' => 'numeric|min:0|max:100',
         ]);
 
         $person = Person::create($validated);
@@ -47,6 +49,8 @@ class PersonController extends Controller
         $validated = $request->validate([
             'name' => 'sometimes|string|max:255',
             'description' => 'nullable|string',
+            'predicted_age_group' => 'nullable|string|max:255',
+            'confidence' => 'nullable|numeric|min:0|max:100',
         ]);
 
         $person->update($validated);

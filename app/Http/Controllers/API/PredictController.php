@@ -32,6 +32,8 @@ class PredictController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'predicted_age_group' => 'string|max:255',
+            'confidence' => 'numeric|min:0|max:100',
         ]);
 
         $person = Person::create($validated);
@@ -41,7 +43,9 @@ class PredictController extends Controller
             History::create([
                 'user_id' => $request->user()->id,
                 'name' => $validated['name'],
+                'predicted_age_group' => $validated['predicted_age_group'],
                 'description' => $validated['description'] ?? null,
+                'confidence' => $validated['confidence'],
             ]);
         }
 
@@ -90,6 +94,8 @@ class PredictController extends Controller
         $validated = $request->validate([
             'name' => 'sometimes|string|max:255',
             'description' => 'nullable|string',
+            'predicted_age_group' => 'nullable|string|max:255',
+            'confidence' => 'nullable|numeric|min:0|max:100',
         ]);
 
         $person->update($validated);

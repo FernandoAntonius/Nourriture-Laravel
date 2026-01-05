@@ -11,5 +11,7 @@ class Person extends Model
     protected $fillable = [
         'name',
         'description',
+        'predicted_age_group',
+        'confidence',
     ];
 }
