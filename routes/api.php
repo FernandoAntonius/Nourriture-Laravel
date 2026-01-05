@@ -23,5 +23,3 @@ Route::apiResource('histories', HistoryController::class)->middleware('auth:sanc
 Route::delete('/histories-clear', [HistoryController::class, 'clearAll'])->middleware('auth:sanctum');
 
 Route::apiResource('contact-us', ContactUsController::class);
-
-Route::post('/predict/classify', [PredictController::class, 'predictClassification']);
