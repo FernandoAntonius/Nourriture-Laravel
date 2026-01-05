@@ -19,8 +19,7 @@ Route::get('/user', function (Request $request) {
 Route::apiResource('persons', PersonController::class);
 Route::apiResource('predict', PredictController::class);
 
-Route::apiResource('histories', HistoryController::class)->only(['index', 'show']);
-Route::apiResource('histories', HistoryController::class)->except(['index', 'show'])->middleware('auth:sanctum');
+Route::apiResource('histories', HistoryController::class)->middleware('auth:sanctum');
 Route::delete('/histories-clear', [HistoryController::class, 'clearAll'])->middleware('auth:sanctum');
 
 Route::apiResource('contact-us', ContactUsController::class);
