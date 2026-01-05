@@ -12,7 +12,6 @@ class History extends Model
     protected $fillable = [
         'user_id',
         'name',
-        'age_classification_id',
         'confidence',
         'description',
     ];
@@ -27,13 +26,5 @@ class History extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Get the age classification for this history.
-     */
-    public function ageClassification(): BelongsTo
-    {
-        return $this->belongsTo(AgeClassification::class);
     }
 }

@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('persons', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('age_classification_id')->constrained('age_classifications')->onDelete('cascade');
             $table->text('description')->nullable();
             $table->timestamps();
         });

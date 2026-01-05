@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Person;
-use App\Models\AgeClassification;
 use Illuminate\Http\Request;
 
 class PersonController extends Controller
@@ -14,7 +13,7 @@ class PersonController extends Controller
      */
     public function index()
     {
-        $persons = Person::with('ageClassification')->get();
+        $persons = Person::all();
         return response()->json($persons);
     }
 
@@ -25,12 +24,11 @@ class PersonController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'age_classification_id' => 'required|exists:age_classifications,id',
             'description' => 'nullable|string',
         ]);
 
         $person = Person::create($validated);
-        return response()->json($person->load('ageClassification'), 201);
+        return response()->json($person, 201);
     }
 
     /**
@@ -38,7 +36,7 @@ class PersonController extends Controller
      */
     public function show(Person $person)
     {
-        return response()->json($person->load('ageClassification'));
+        return response()->json($person);
     }
 
     /**
@@ -48,12 +46,11 @@ class PersonController extends Controller
     {
         $validated = $request->validate([
             'name' => 'sometimes|string|max:255',
-            'age_classification_id' => 'sometimes|exists:age_classifications,id',
             'description' => 'nullable|string',
         ]);
 
         $person->update($validated);
-        return response()->json($person->load('ageClassification'));
+        return response()->json($person);
     }
 
     /**
@@ -65,16 +62,5 @@ class PersonController extends Controller
         return response()->json(['message' => 'Person deleted successfully']);
     }
 
-    /**
-     * Get all persons by age classification.
-     */
-    public function getByAgeClassification(AgeClassification $ageClassification)
-    {
-        $persons = $ageClassification->persons()->get();
-        return response()->json([
-            'age_classification' => $ageClassification,
-            'persons' => $persons,
-            'count' => $persons->count(),
-        ]);
-    }
+
 }

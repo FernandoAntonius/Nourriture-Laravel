@@ -23,7 +23,6 @@ class HistoryController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'age_classification_id' => 'required|exists:age_classifications,id',
             'confidence' => 'required|numeric|min:0|max:100',
             'description' => 'nullable|string',
         ]);
@@ -35,7 +34,7 @@ class HistoryController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Riwayat berhasil dibuat',
-            'data' => $history->load('ageClassification'),
+            'data' => $history,
         ], 201);
     }
 
@@ -45,7 +44,6 @@ class HistoryController extends Controller
     public function index(Request $request)
     {
         $histories = History::where('user_id', $request->user()->id)
-            ->with('ageClassification')
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -63,7 +61,6 @@ class HistoryController extends Controller
     public function show(Request $request, $id)
     {
         $history = History::where('user_id', $request->user()->id)
-            ->with('ageClassification')
             ->find($id);
 
         if (!$history) {
@@ -105,7 +102,7 @@ class HistoryController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Riwayat berhasil diperbarui',
-            'data' => $history->load('ageClassification'),
+            'data' => $history,
         ]);
     }
 
