@@ -6,6 +6,11 @@ use App\Http\Controllers\API\AgeClassificationController;
 use App\Http\Controllers\API\PersonController;
 use App\Http\Controllers\API\PredictController;
 use App\Http\Controllers\API\HistoryController;
+use App\Http\Controllers\API\AuthController;
+
+// Auth routes (public)
+Route::post('/auth/register', [AuthController::class, 'register']);
+Route::post('/auth/login', [AuthController::class, 'login']);
 
 Route::get('/user', function (Request $request) {
     return $request->user();

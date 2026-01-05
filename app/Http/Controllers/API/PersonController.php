@@ -25,11 +25,8 @@ class PersonController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'age' => 'required|integer|min:0|max:150',
             'age_classification_id' => 'required|exists:age_classifications,id',
-            'email' => 'nullable|email|unique:persons,email',
-            'phone' => 'nullable|string',
-            'address' => 'nullable|string',
+            'description' => 'nullable|string',
         ]);
 
         $person = Person::create($validated);
@@ -51,11 +48,8 @@ class PersonController extends Controller
     {
         $validated = $request->validate([
             'name' => 'sometimes|string|max:255',
-            'age' => 'sometimes|integer|min:0|max:150',
             'age_classification_id' => 'sometimes|exists:age_classifications,id',
-            'email' => 'sometimes|email|unique:persons,email,' . $person->id,
-            'phone' => 'nullable|string',
-            'address' => 'nullable|string',
+            'description' => 'nullable|string',
         ]);
 
         $person->update($validated);

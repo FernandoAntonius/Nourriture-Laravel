@@ -11,15 +11,8 @@ class Person extends Model
 
     protected $fillable = [
         'name',
-        'age',
         'age_classification_id',
-        'email',
-        'phone',
-        'address',
-    ];
-
-    protected $casts = [
-        'age' => 'integer',
+        'description',
     ];
 
     /**

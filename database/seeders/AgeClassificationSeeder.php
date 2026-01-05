@@ -16,52 +16,66 @@ class AgeClassificationSeeder extends Seeder
     public function run(): void
     {
         AgeClassification::create([
-            'name' => 'Balita',
+            'name' => '0~2',
             'min_age' => 0,
-            'max_age' => 5,
-            'description' => 'Usia 0-5 tahun',
+            'max_age' => 2,
+            'description' => 'Usia 0-2 tahun',
         ]);
 
         AgeClassification::create([
-            'name' => 'Anak-anak',
-            'min_age' => 6,
-            'max_age' => 12,
-            'description' => 'Usia 6-12 tahun',
+            'name' => '3~9',
+            'min_age' => 3,
+            'max_age' => 9,
+            'description' => 'Usia 3-9 tahun',
         ]);
 
         AgeClassification::create([
-            'name' => 'Remaja',
-            'min_age' => 13,
-            'max_age' => 17,
-            'description' => 'Usia 13-17 tahun',
+            'name' => '10~19',
+            'min_age' => 10,
+            'max_age' => 19,
+            'description' => 'Usia 10-19 tahun',
         ]);
 
         AgeClassification::create([
-            'name' => 'Dewasa Muda',
-            'min_age' => 18,
-            'max_age' => 30,
-            'description' => 'Usia 18-30 tahun',
+            'name' => '20~29',
+            'min_age' => 20,
+            'max_age' => 29,
+            'description' => 'Usia 20-29 tahun',
         ]);
 
         AgeClassification::create([
-            'name' => 'Dewasa',
-            'min_age' => 31,
-            'max_age' => 45,
-            'description' => 'Usia 31-45 tahun',
+            'name' => '30~39',
+            'min_age' => 30,
+            'max_age' => 39,
+            'description' => 'Usia 30-39 tahun',
         ]);
 
         AgeClassification::create([
-            'name' => 'Setengah Baya',
-            'min_age' => 46,
-            'max_age' => 60,
-            'description' => 'Usia 46-60 tahun',
+            'name' => '40~49',
+            'min_age' => 40,
+            'max_age' => 49,
+            'description' => 'Usia 40-49 tahun',
         ]);
 
         AgeClassification::create([
-            'name' => 'Lansia',
-            'min_age' => 61,
+            'name' => '50~59',
+            'min_age' => 50,
+            'max_age' => 59,
+            'description' => 'Usia 50-59 tahun',
+        ]);
+
+        AgeClassification::create([
+            'name' => '60~69',
+            'min_age' => 60,
+            'max_age' => 69,
+            'description' => 'Usia 60-69 tahun',
+        ]);
+
+        AgeClassification::create([
+            'name' => '70+',
+            'min_age' => 70,
             'max_age' => 150,
-            'description' => 'Usia 61+ tahun',
+            'description' => 'Usia 70+ tahun',
         ]);
     }
 }

@@ -17,14 +17,26 @@ class HistoryController extends Controller
     }
 
     /**
-     * Store is not used for history (POST endpoint)
+     * Store a newly created history record (POST endpoint)
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'age_classification_id' => 'required|exists:age_classifications,id',
+            'confidence' => 'required|numeric|min:0|max:100',
+            'description' => 'nullable|string',
+        ]);
+
+        $validated['user_id'] = $request->user()->id;
+
+        $history = History::create($validated);
+
         return response()->json([
-            'success' => false,
-            'message' => 'History tidak dapat dibuat melalui endpoint ini. Gunakan POST /predict untuk membuat history.',
-        ], 400);
+            'success' => true,
+            'message' => 'Riwayat berhasil dibuat',
+            'data' => $history->load('ageClassification'),
+        ], 201);
     }
 
     /**
@@ -84,10 +96,8 @@ class HistoryController extends Controller
 
         $validated = $request->validate([
             'name' => 'sometimes|string|max:255',
-            'age' => 'sometimes|integer|min:0|max:150',
-            'email' => 'sometimes|email',
-            'phone' => 'nullable|string',
-            'address' => 'nullable|string',
+            'confidence' => 'sometimes|numeric|min:0|max:100',
+            'description' => 'nullable|string',
         ]);
 
         $history->update($validated);

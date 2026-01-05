@@ -14,11 +14,8 @@ return new class extends Migration
         Schema::create('persons', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('age');
             $table->foreignId('age_classification_id')->constrained('age_classifications')->onDelete('cascade');
-            $table->string('email')->unique()->nullable();
-            $table->string('phone')->nullable();
-            $table->text('address')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

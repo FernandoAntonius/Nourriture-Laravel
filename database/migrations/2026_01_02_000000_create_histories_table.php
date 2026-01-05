@@ -15,11 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('name');
-            $table->integer('age');
             $table->foreignId('age_classification_id')->constrained('age_classifications')->onDelete('cascade');
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('address')->nullable();
+            $table->decimal('confidence', 5, 2);
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
